@@ -14,7 +14,7 @@ RUN git clone https://github.com/tseemann/prokka.git &&\
 	prokka/bin/prokka --setupdb
 
 # set environment variables
-RUN PATH=$PATH:prokka/bin
+RUN PATH=$PATH:/prokka/bin
 
 # set data mounting point
 RUN mkdir /data
