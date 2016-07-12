@@ -14,7 +14,7 @@ RUN git clone https://github.com/tseemann/prokka.git &&\
 	prokka/bin/prokka --setupdb
 
 # set environment variables
-ENV $PATH=$PATH:prokka/bin
+RUN PATH=$PATH:prokka/bin
 
 CMD ["/bin/bash"]
 
