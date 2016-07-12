@@ -16,5 +16,8 @@ RUN git clone https://github.com/tseemann/prokka.git &&\
 # set environment variables
 RUN PATH=$PATH:prokka/bin
 
+# set data mounting point
+RUM mkdir /data
+
 CMD ["/bin/bash"]
 
