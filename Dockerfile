@@ -14,8 +14,8 @@ RUN apt-get update -qq &&\
 RUN git clone https://github.com/tseemann/prokka.git &&\
 	prokka/bin/prokka --setupdb
 
-# set environment variables
-RUN PATH=$PATH:/prokka/bin
+# set links to /usr/bin
+RUN ln -s /prokka/bin/* /usr/bin
 
 # set data mounting point
 RUN mkdir /data
