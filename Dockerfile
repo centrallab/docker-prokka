@@ -19,6 +19,8 @@ RUN git clone https://github.com/tseemann/prokka.git && \
 # set links to /usr/bin
 ENV PATH $PATH:/prokka/bin
 
+ADD batch.py /program/batch.py
+
 # set data mounting point
 RUN mkdir /data
 WORKDIR /data
