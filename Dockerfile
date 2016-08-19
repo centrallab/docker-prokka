@@ -10,7 +10,8 @@ RUN apt-get update -qq && \
 						libxml-simple-perl \
 						libdigest-md5-perl \
 						bioperl && \
-	rm -rf /var/lib/apt/lists/*
+	apt-get clean && \
+	rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
 # clone prokka
 RUN git clone https://github.com/tseemann/prokka.git && \
