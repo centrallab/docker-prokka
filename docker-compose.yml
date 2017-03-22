@@ -22,6 +22,7 @@ services:
         image: a504082002/prokka:celery
         volumes:
             - .:/app
+            - ./input:/input
         links:
             - rabbit:my-rabbit
             - redis:my-redis

@@ -20,6 +20,6 @@ def prokka(filename):
     args.append(("--cpus", "2"))
     args.append(("--outdir", os.path.join("/output", name)))
     args.append(("--prefix", name))
-    cmd = operations.format_cmd("prokka", args, os.path.join("/input", filename))
+    cmd = format_cmd("prokka", args, os.path.join("/input", filename))
     os.system(cmd)
     
