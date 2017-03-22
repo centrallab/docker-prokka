@@ -15,14 +15,13 @@ services:
         ports:
             - "6379:6379"
 
-    worker:
+    prokka:
         #build:
         #    context: .
         #    dockerfile: Dockerfile
         image: a504082002/prokka:celery
         volumes:
             - .:/app
-            - ./input:/input
         links:
             - rabbit:my-rabbit
             - redis:my-redis
@@ -36,11 +35,12 @@ services:
             - .:/app
             - ./input:/input
         links:
-            - worker:worker
+            - prokka:prokka
             - rabbit:my-rabbit
             - redis:my-redis
         depends_on:
-            - worker
+            - prokka
         entrypoint:
             - python3
             - run_tasks.py
+            

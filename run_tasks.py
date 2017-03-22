@@ -6,7 +6,7 @@ if __name__ == '__main__':
     print("sleep for 10 sec")
     time.sleep(10)
     results = []
-    for name in os.listdir("/app/input"):
+    for name in os.listdir("/input"):
         result = prokka.delay(name)
         results.append(result)
     
