@@ -2,9 +2,7 @@ FROM java:8
 MAINTAINER a504082002 <a504082002@gmail.com>
 
 # Install dependencies
-RUN apt-get update -qq && \
-	apt-get install -yq --no-install-recommends \
-						git \
+RUN apk --update add	git \
 						less \
 						libdatetime-perl \
 						libxml-simple-perl \
