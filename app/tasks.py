@@ -1,11 +1,20 @@
 from app.celeryapp import app
-import time
+import os
+import os.path
 
+def format_cmd(prog, flags, arg):
+    a = list(map(lambda x: x[0] + "=" + str(x[1]) if x[1] != "" else x[0], flags))
+    flag = " ".join(a)
+    return " ".join([prog, flag, arg])
 
 @app.task
-def add(x, y):
-    print("long time task begins")
-    time.sleep(1)
-    print("long time task finished")
-    return x + y
+def prokka(filename):
+    name, ext = filename.split(".")
+
+    args = list()
+    args.append(("--cpus", "2"))
+    args.append(("--outdir", os.path.join("/output", name)))
+    args.append(("--prefix", name))
+    cmd = operations.format_cmd("prokka", args, os.path.join("/input", filename))
+    os.system(cmd)
     

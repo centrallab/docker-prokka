@@ -2,27 +2,29 @@ FROM java:8
 MAINTAINER a504082002 <a504082002@gmail.com>
 
 # Install dependencies
-RUN apk --update add	git \
-						less \
-						libdatetime-perl \
-						libxml-simple-perl \
-						libdigest-md5-perl \
-						bioperl && \
+RUN apt-get update -qq && \
+	apt-get install -yq --no-install-recommends git \
+						                        less \
+						                        libdatetime-perl \
+						                        libxml-simple-perl \
+						                        libdigest-md5-perl \
+						                        bioperl \
+						                        python3 \
+						                        python3-pip && \
 	apt-get clean && \
 	rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
 # clone prokka
 RUN git clone https://github.com/tseemann/prokka.git && \
 	prokka/bin/prokka --setupdb
-
-# set links to /usr/bin
 ENV PATH $PATH:/prokka/bin
 
-ADD batch.py /program/batch.py
+# Install celery
+ADD requirements.txt /app/requirements.txt
+ADD ./app/ /app/
+WORKDIR /app/
+RUN pip3 install -r requirements.txt
 
-# set data mounting point
-RUN mkdir /data
-WORKDIR /data
-
-CMD ["/bin/bash"]
+RUN mkdir /input && mkdir /output
+ENTRYPOINT celery worker --app=app.celeryapp.app -l info
 
