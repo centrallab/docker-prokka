@@ -22,10 +22,24 @@ services:
         image: a504082002/prokka:celery
         volumes:
             - .:/app
-            - ./input:/input
         links:
             - rabbit:my-rabbit
             - redis:my-redis
         depends_on:
             - rabbit
             - redis
+            
+    test:
+        image: a504082002/prokka:celery
+        volumes:
+            - .:/app
+            - ./input:/input
+        links:
+            - worker:worker
+            - rabbit:my-rabbit
+            - redis:my-redis
+        depends_on:
+            - worker
+        entrypoint:
+            - python3
+            - run_tasks.py
