@@ -14,7 +14,7 @@ RUN apt-get update -qq && \
 	apt-get clean && \
 	rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
-# clone prokka
+# clone app
 RUN git clone https://github.com/tseemann/prokka.git && \
 	prokka/bin/prokka --setupdb
 ENV PATH $PATH:/prokka/bin
