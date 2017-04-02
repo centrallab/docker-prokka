@@ -1,4 +1,4 @@
-from app.tasks import prokka
+from prokkaapp.tasks import prokka
 import os
 import time
 

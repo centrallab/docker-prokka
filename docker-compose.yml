@@ -27,6 +27,8 @@ services:
     test:
         image: a504082002/prokka:celery
         volumes:
+            - ./prokkaapp:/prokkaapp
+            - ./test:/test
             - ./input:/input
             - ./output:/output
         links:
@@ -34,8 +36,8 @@ services:
             - rabbit:my-rabbit
             - redis:my-redis
         depends_on:
-            - prokka
+            - prokkaapp
         entrypoint:
             - python3
-            - run_tasks.py
+            - /test/run_tasks.py
             

@@ -1,4 +1,4 @@
-from app.celeryapp import app
+from prokkaapp.celeryapp import app
 import os
 import os.path
 
@@ -22,7 +22,7 @@ def prokka(filename, file):
     args.append(("--cpus", "2"))
     args.append(("--outdir", output_dir))
     args.append(("--prefix", name))
-    cmd = format_cmd("app", args, os.path.join("/input", filename))
+    cmd = format_cmd("prokkaapp", args, os.path.join("/input", filename))
     os.system(cmd)
 
     # read results for return

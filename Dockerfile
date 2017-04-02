@@ -14,17 +14,17 @@ RUN apt-get update -qq && \
 	apt-get clean && \
 	rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
-# clone app
+# clone prokka
 RUN git clone https://github.com/tseemann/prokka.git && \
 	prokka/bin/prokka --setupdb
 ENV PATH $PATH:/prokka/bin
 
 # Install celery
-ADD requirements.txt /app/requirements.txt
-ADD ./app/ /app/
-WORKDIR /app/
-RUN pip3 install -r requirements.txt
+ADD requirements.txt /prokkaapp/requirements.txt
+ADD ./prokkaapp/ /prokkaapp/
+WORKDIR /
+RUN pip3 install -r prokkaapp/requirements.txt
 
 RUN mkdir /input && mkdir /output
-ENTRYPOINT celery worker --app=app.celeryapp.app -l info
+ENTRYPOINT celery worker --app=prokkaapp.celeryapp.app -l info
 
