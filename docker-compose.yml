@@ -36,7 +36,7 @@ services:
             - rabbit:my-rabbit
             - redis:my-redis
         depends_on:
-            - prokkaapp
+            - prokka
         entrypoint:
             - python3
             - /test/run_tasks.py
